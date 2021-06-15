@@ -47,7 +47,7 @@ exports.Register = async (req, res, next) => {
     if (foundUserName) {
         return res.status(400).json({
             success: false,
-            message: 'A user whit that Username already exits!',
+            message: 'A user with that Username already exits!',
         });
     }
 
@@ -61,7 +61,7 @@ exports.Register = async (req, res, next) => {
         const activated = false;
         const passwordHash = await bcrypt.hash(password, hashConst);
         const uid = crypto.randomBytes(20).toString('hex');
-        const photo = "";//posibil sa scoatem functionalitatea de poza la conturi create manual
+        const photo = "";
         const activationCode = crypto.randomBytes(6).toString('hex');
         const newUser = new UserModel({ activated, userName, email, password: passwordHash, uid, photo, activationCode });
         await newUser.save();
